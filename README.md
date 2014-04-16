@@ -1,4 +1,4 @@
 docker-jenkins
 ==============
 
-Box to install jenkins
+Box to run an jenkins instance.
