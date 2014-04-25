@@ -14,7 +14,7 @@ RUN curl -s -o /usr/share/jenkins-1.532.3.war  http://ftp.nluug.nl/programming/j
 RUN yum install -y supervisor
 RUN sed -i -e 's/nodaemon=false/nodaemon=true/' /etc/supervisord.conf
 
-# SSH keys to log into atlas without a password
+# SSH keys to log into git-server without a password
 ADD root/ssh/id_rsa /root/.ssh/id_rsa
 RUN chmod 600 /root/.ssh/id_rsa
 ADD root/ssh/id_rsa.pub /root/.ssh/id_rsa.pub
