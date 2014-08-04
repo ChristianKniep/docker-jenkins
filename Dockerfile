@@ -9,7 +9,7 @@ RUN ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime
 
 RUN yum clean all
 RUN yum install -y java-1.7.0-openjdk
-RUN curl -s -o /usr/share/jenkins-1.532.3.war  http://ftp.nluug.nl/programming/jenkins/war-stable-rc/1.532.3/jenkins.war
+RUN curl -s -o /usr/share/jenkins.war  http://ftp.nluug.nl/programming/jenkins/war/1.574/jenkins.war
 
 RUN yum install -y supervisor
 RUN sed -i -e 's/nodaemon=false/nodaemon=true/' /etc/supervisord.conf
@@ -27,13 +27,13 @@ RUN chmod 644 /root/.ssh/known_hosts
 RUN yum install -y python-docopt python-simplejson python-envoy rubygems
 ### WORKAROUND
 RUN yum install -y ruby-devel make gcc
-RUN gem install jls-grok
+#RUN gem install jls-grok
 #RUN yum install rubygem-jls-grok 
 #### \WORKAROUND
 # fpm and git
 RUN yum install -y git-core rpm-build createrepo bc
 ### WORKAROUND
-RUN gem install fpm
+#RUN gem install --source http://rubygems.org fpm
 # RUN yum install -y rubygem-fpm
 ### \WORKAROUND
 
