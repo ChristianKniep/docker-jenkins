@@ -1,0 +1,26 @@
+consul:
+    image: qnib/consul
+    ports:
+     - "8500:8500"
+    environment:
+    - DC_NAME=dc1
+    - FORWARD_TO_LOGSTASH=false
+    dns: 127.0.0.1
+    hostname: consul
+    privileged: true
+
+jenkins:
+    image: qnib/jenkins
+    ports:
+    - "8080:8080"
+    links:
+    - consul:consul
+    environment:
+    - DC_NAME=dc1
+    - FORWARD_TO_LOGSTASH=false
+    volumes:
+    #- /opt/jenkins/
+    - ${HOME}/jenkins:/opt/jenkins
+    dns: 127.0.0.1
+    hostname: jenkins
+    privileged: true
