@@ -5,7 +5,7 @@ MAINTAINER "Christian Kniep <christian@qnib.org>"
 
 RUN yum clean all
 RUN yum install -y java-1.8.0-openjdk
-RUN curl -s -o /usr/share/jenkins.war http://mirrors.jenkins-ci.org/war/1.608/jenkins.war
+RUN cd /usr/share/ && wget -q http://mirrors.jenkins-ci.org/war/1.608/jenkins.war
 
 ##### Provide tools to do stuff
 # grok testing
@@ -26,3 +26,4 @@ RUN yum install -y git-core rpm-build createrepo bc
 RUN mkdir -p /opt/jenkins
 #ADD ./jenkins /opt/jenkins
 ADD etc/supervisord.d/jenkins.ini /etc/supervisord.d/
+ADD etc/consul.d/check_jenkins.json /etc/consul.d/check_jenkins.json
