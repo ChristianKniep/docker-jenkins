@@ -1,26 +1,11 @@
 ###### Jenkins image
 # runs jenkins instance within a container
-FROM qnib/fd20
+FROM qnib/terminal:cos7
 MAINTAINER "Christian Kniep <christian@qnib.org>"
 
-# Solution for 'ping: icmp open socket: Operation not permitted'
-RUN chmod u+s /usr/bin/ping
-RUN ln -sf /usr/share/zoneinfo/Europe/Paris /etc/localtime 
-
 RUN yum clean all
-RUN yum install -y java-1.7.0-openjdk
-RUN curl -s -o /usr/share/jenkins.war  http://ftp.nluug.nl/programming/jenkins/war/1.574/jenkins.war
-
-RUN yum install -y supervisor
-RUN sed -i -e 's/nodaemon=false/nodaemon=true/' /etc/supervisord.conf
-
-# SSH keys to log into git-server without a password
-ADD root/ssh/id_rsa /root/.ssh/id_rsa
-RUN chmod 600 /root/.ssh/id_rsa
-ADD root/ssh/id_rsa.pub /root/.ssh/id_rsa.pub
-RUN chmod 644 /root/.ssh/id_rsa.pub
-ADD root/ssh/known_hosts /root/.ssh/known_hosts
-RUN chmod 644 /root/.ssh/known_hosts
+RUN yum install -y java-1.8.0-openjdk
+RUN curl -s -o /usr/share/jenkins.war http://mirrors.jenkins-ci.org/war/1.608/jenkins.war
 
 ##### Provide tools to do stuff
 # grok testing
@@ -40,6 +25,4 @@ RUN yum install -y git-core rpm-build createrepo bc
 ### Jenkins HOME
 RUN mkdir -p /opt/jenkins
 #ADD ./jenkins /opt/jenkins
-ADD etc/supervisord.d /etc/supervisord.d
-
-CMD /bin/supervisord -c /etc/supervisord.conf
+ADD etc/supervisord.d/jenkins.ini /etc/supervisord.d/
