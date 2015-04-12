@@ -18,7 +18,7 @@ RUN yum install -y ruby-devel make gcc
 # fpm and git
 RUN yum install -y git-core rpm-build createrepo bc
 ### WORKAROUND
-#RUN gem install --source http://rubygems.org fpm
+RUN gem install --source http://rubygems.org fpm
 # RUN yum install -y rubygem-fpm
 ### \WORKAROUND
 
