@@ -29,4 +29,5 @@ ADD etc/supervisord.d/jenkins.ini /etc/supervisord.d/
 ADD etc/consul.d/check_jenkins.json /etc/consul.d/check_jenkins.json
 
 ## To pip install pyslurm
-RUN yum install -y Cython
+RUN pip install --upgrade pip && \
+    pip install cython
